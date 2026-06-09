@@ -7,10 +7,13 @@ def fetch_data():
 
     if response.status_code == 200:
         return response.json()
+
     return {}
 
 
-def write_log(post):
+def generate_log():
+    post = fetch_data()
+
     log_data = [
         "User logged in",
         "User updated profile",
@@ -25,9 +28,8 @@ def write_log(post):
             file.write(f"{entry}\n")
 
     print(f"Log written to {filename}")
+    return filename
 
 
 if __name__ == "__main__":
-    post = fetch_data()
-    print("Fetched Post Title:", post.get("title", "No title found"))
-    write_log(post)
+    generate_log()
